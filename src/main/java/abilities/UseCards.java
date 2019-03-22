@@ -5,7 +5,7 @@ import net.serenitybdd.screenplay.Ability;
 
 public class UseCards implements Ability {
 
-    private Card card;
+    Card card;
 
     public UseCards(Card toUse) {
         this.card = toUse;
@@ -17,6 +17,6 @@ public class UseCards implements Ability {
 
     @Override
     public String toString() {
-        return "use of following card: "+ getCard().getPam();
+        return "use of following card: "+ getCard().getPan();
     }
 }

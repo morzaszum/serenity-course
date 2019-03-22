@@ -1,18 +1,18 @@
 package abilities;
 
 public class Card {
-    private String pam;
+    private String pan;
     private String expDate;
     private int balance;
 
-    public Card(String pam, String extDate, int balance) {
-        this.pam = pam;
+    public Card(String pan, String extDate, int balance) {
+        this.pan = pan;
         this.expDate = extDate;
         this.balance = balance;
     }
 
-    public void setPam(String pam) {
-        this.pam = pam;
+    public void setPan(String pan) {
+        this.pan = pan;
     }
 
     public String getExpDate() {
@@ -27,7 +27,7 @@ public class Card {
         this.balance = balance;
     }
 
-    public String getPam() {
-        return pam;
+    public String getPan() {
+        return pan;
     }
 }

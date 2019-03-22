@@ -6,7 +6,7 @@ public class UseAccount implements Ability {
 
     private Credentials credentials;
 
-    public UseAccount(Credentials credentials){
+    UseAccount(Credentials credentials){
         this.credentials = credentials;
     }
 
