@@ -1,54 +1,47 @@
 package com.github.qbek.screenplay;
 
-import abilities.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.qbek.screenplay.Cast.SuperHeroClass;
 import cucumber.api.java.Before;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import facts.AccountWithCard;
-import facts.Facts;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.actors.Cast;
 import net.serenitybdd.screenplay.actors.OnStage;
-import net.serenitybdd.screenplay.facts.Fact;
+
+import static com.github.qbek.screenplay.Tasks.Tasks.*;
+import static facts.Facts.accountWithCreditCard;
+import static facts.Facts.accountWithDebitCard;
 
 public class CardBalanceSteps {
 
     @Before
     public void setup() {
-        OnStage.setTheStage(new Cast());
+        OnStage.setTheStage(new SuperHeroClass());
     }
 
     @Given("^(\\w+) is a debit card user with active account$")
     public void carlIsACardUserWithActiveAccount(String name) throws Throwable {
         Actor user = OnStage.theActorCalled(name).describedAs("is a debit card user with active account");
-        user.has(Facts.accountWithDebitCard());
+        user.has(accountWithDebitCard());
     }
 
-    @And("^(\\w+) is logged in his account$")
-    public void heIsLoggedInHisAccount(String name) {
+    @Given("^(\\w+) is logged in his account$")
+    public void heIsLoggedInHisAccount(String name) throws JsonProcessingException {
         Actor user = OnStage.theActorCalled(name);
-        Credentials creds = user.usingAbilityTo(UseAccount.class).getCredentials();
-        System.out.println(creds.getLogin() + " " + creds.getPassword());
+        user.attemptsTo(userLogsIntoAccount());
     }
 
-    @Then("^correct balance is presented$")
-    public void correctBalanceIsPresented() {
-        Actor user = OnStage.theActorInTheSpotlight();
-
-    }
 
     @When("^(\\w+) checks his card balance$")
-    public void carlChecksHisCardBalance(String name) {
+    public void checkHisDebitCardBalance(String name) {
         Actor user = OnStage.theActorCalled(name);
-        Card card = user.usingAbilityTo(UseCards.class).getCard();
-        System.out.println(card.getPan());
+        user.attemptsTo(checkHisCardBalance());
     }
+
 
     @Given("^(\\w+) is a credit card user with active account$")
     public void carlIsACreditCardUserWithActiveAccount(String name) throws Throwable {
         Actor user = OnStage.theActorCalled(name).describedAs("is a credit card user with active account");
-        user.has(Facts.accountWithCreditCard());
+        user.has(accountWithCreditCard());
     }
 }

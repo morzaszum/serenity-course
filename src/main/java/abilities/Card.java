@@ -1,14 +1,20 @@
 package abilities;
 
+import facts.CardType;
+
 public class Card {
     private String pan;
     private String expDate;
     private int balance;
+    private CardType type;
 
-    public Card(String pan, String extDate, int balance) {
+
+
+    public Card(String pan, String extDate, int balance, CardType type) {
         this.pan = pan;
         this.expDate = extDate;
         this.balance = balance;
+        this.type = type;
     }
 
     public void setPan(String pan) {
@@ -29,5 +35,9 @@ public class Card {
 
     public String getPan() {
         return pan;
+    }
+
+    public CardType getType() {
+        return type;
     }
 }

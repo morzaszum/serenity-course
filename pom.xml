@@ -57,6 +57,12 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-screenplay-rest</artifactId>
+      <version>${serenity.version}</version>
+    </dependency>
+
   </dependencies>
 
   <build>

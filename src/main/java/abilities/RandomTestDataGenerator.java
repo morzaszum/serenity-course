@@ -3,6 +3,7 @@ package abilities;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
+import facts.CardType;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.model.HttpRequest;
 import org.mockserver.model.HttpResponse;
@@ -16,7 +17,8 @@ public class RandomTestDataGenerator implements TestDataGenerator{
         Card card = new Card(
                 faker.numerify("11022########"),
                 faker.business().creditCardExpiry(),
-                faker.number().numberBetween(10, 100)
+                faker.number().numberBetween(10, 100),
+                CardType.DEBIT
         );
         UseCards useCards = new UseCards(card);
         System.out.println("Random debit card");
@@ -27,7 +29,8 @@ public class RandomTestDataGenerator implements TestDataGenerator{
         Card card = new Card(
                 faker.numerify("33022########"),
                 faker.business().creditCardExpiry(),
-                faker.number().numberBetween(10, 100)
+                faker.number().numberBetween(10, 100),
+                CardType.CREDIT
         );
         UseCards useCards = new UseCards(card);
         System.out.println("Random credit card");

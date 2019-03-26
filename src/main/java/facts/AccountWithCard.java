@@ -2,18 +2,13 @@ package facts;
 
 import abilities.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import net.serenitybdd.screenplay.Ability;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.facts.Fact;
 import org.mockserver.client.MockServerClient;
-import org.mockserver.model.HttpRequest;
-import org.mockserver.model.HttpResponse;
 import utils.LocalSystemSetup;
 import utils.SystemSetup;
 import utils.UatSetup;
-
-import static abilities.RandomTestDataGenerator.*;
 
 public class AccountWithCard implements Fact {
     private static MockServerClient client = new MockServerClient("localhost", 8080);
@@ -62,20 +57,21 @@ public class AccountWithCard implements Fact {
     }
 
     private Ability useCard() throws Exception {
-        UseCards useCard;
+        UseCards usedCard;
 
         switch (cardType) {
             case DEBIT:
-                useCard = data.createDebitCard();
+                usedCard = data.createDebitCard();
                 break;
             case CREDIT:
-                useCard = data.createCreditCard();
+                usedCard = data.createCreditCard();
                 break;
 
             default:
                 throw new Exception("Unknown card type");
         }
-        return useCard;
+        sysSetup.setupCard(usedCard.getCard());
+        return usedCard;
     }
 
     private Ability useAccount() throws JsonProcessingException {
@@ -88,8 +84,6 @@ public class AccountWithCard implements Fact {
     public String toString() {
         return "Account with " + cardType + " card";
     }
-
-
 
 
 }
