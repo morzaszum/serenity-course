@@ -10,13 +10,13 @@ import utils.LocalSystemSetup;
 import utils.SystemSetup;
 import utils.UatSetup;
 
-public class AccountWithCard implements Fact {
+public class AccountWithOptionalCard implements Fact {
     private static MockServerClient client = new MockServerClient("localhost", 8080);
     private CardType cardType;
     private TestDataGenerator data;
     private SystemSetup sysSetup;
 
-    public AccountWithCard(CardType cardType) throws Exception {
+    public AccountWithOptionalCard(CardType cardType) throws Exception {
         this.cardType = cardType;
         data = getTestDataGenerator();
         sysSetup = getSystemSetup();
@@ -49,7 +49,10 @@ public class AccountWithCard implements Fact {
     public void setup(Actor actor) {
         System.out.println("Testy odpalimy na " + System.getProperty("env"));
         try {
-            actor.can(useCard());
+            if (cardType != CardType.NONE) {
+                actor.can(useCard());
+            }
+
             actor.can(useAccount());
         } catch (Exception e) {
             e.printStackTrace();

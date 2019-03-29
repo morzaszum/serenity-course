@@ -12,3 +12,8 @@ Feature: Card balance
     And he is logged in his account
     When Adam checks his card balance
     Then correct balance is presented
+
+    Scenario: User tries to log in with incorrect credentials
+      Given Helmut is a user with active account
+      When he tries to login with incorrect credentials
+      Then he is not logged in
